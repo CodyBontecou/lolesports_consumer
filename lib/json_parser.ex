@@ -6,7 +6,6 @@ defmodule JSONParser do
 
     case HTTPoison.get(url, headers) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
-        # parse_response(body)
         decode_nested(body)
 
       {:ok, %HTTPoison.Response{status_code: status_code}} ->
@@ -17,20 +16,8 @@ defmodule JSONParser do
     end
   end
 
-  defp parse_response(json) do
-    case Jason.decode(json) do
-      {:ok, parsed_json} ->
-        LeagueInfo.extract_info(parsed_json)
-
-      # |> tomorrows_events()
-
-      {:error, reason} ->
-        {:error, "JSON parsing error: #{reason}"}
-    end
-  end
-
   def decode_nested(json) when is_binary(json) do
-    case Jason.decode(json) do
+    case decode(json) do
       {:ok, parsed_json} ->
         decode_nested(parsed_json)
 
@@ -41,6 +28,10 @@ defmodule JSONParser do
 
   def decode_nested(%{} = map) do
     decode_nested_map(map)
+  end
+
+  def decode_nested(_other) do
+    {:error, "Unknown JSON structure"}
   end
 
   defp decode_nested_map(map) do
@@ -56,7 +47,7 @@ defmodule JSONParser do
     end)
   end
 
-  def decode_nested(_other) do
-    {:error, "Unknown JSON structure"}
+  defp decode(json) do
+    Jason.decode(json)
   end
 end

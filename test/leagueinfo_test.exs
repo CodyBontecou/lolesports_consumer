@@ -34,8 +34,6 @@ defmodule LeagueInfoTest do
     actual =
       LeagueInfo.extract_info(data) |> LeagueInfo.events_in_range(start_time, end_time)
 
-    IO.inspect(LeagueInfo.extract_info(data))
-
     assert actual == expected
   end
 
