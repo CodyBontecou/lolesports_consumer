@@ -1,6 +1,6 @@
 # LolesportsConsumer
 
-**TODO: Add description**
+[![Coverage Status](https://coveralls.io/repos/github/CodyBontecou/lolesports_consumer/badge.svg?branch=main)](https://coveralls.io/github/CodyBontecou/lolesports_consumer?branch=main)
 
 ## Installation
 
