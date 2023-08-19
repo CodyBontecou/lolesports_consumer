@@ -27,7 +27,14 @@ defmodule LeagueInfoTest do
   test "events_in_range" do
     data = LeagueInfoMocks.get_live()
     expected = LeagueInfoMocks.events_in_range_expected()
-    actual = LeagueInfo.extract_info(data) |> LeagueInfo.events_in_range(-5, 5)
+
+    start_time = ~D[2023-08-10]
+    end_time = ~D[2023-08-24]
+
+    actual =
+      LeagueInfo.extract_info(data) |> LeagueInfo.events_in_range(start_time, end_time)
+
+    IO.inspect(LeagueInfo.extract_info(data))
 
     assert actual == expected
   end
@@ -35,7 +42,12 @@ defmodule LeagueInfoTest do
   test "events_in_range failed DateTime case" do
     data = LeagueInfoMocks.get_live_bad_dates()
     expected = LeagueInfoMocks.events_in_range_failed_datetime_case_expected()
-    actual = LeagueInfo.extract_info(data) |> LeagueInfo.events_in_range(-5, 5)
+
+    start_time = ~D[2023-08-10]
+    end_time = ~D[2023-08-24]
+
+    actual =
+      LeagueInfo.extract_info(data) |> LeagueInfo.events_in_range(start_time, end_time)
 
     assert actual == expected
   end

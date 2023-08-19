@@ -55,10 +55,7 @@ defmodule LeagueInfo do
     event_details
   end
 
-  def events_in_range(events, start_day, end_day) do
-    start_time = Date.utc_today() |> Date.add(start_day)
-    end_time = Date.utc_today() |> Date.add(end_day)
-
+  def events_in_range(events, start_time, end_time) do
     filter_event = fn event ->
       case DateTime.from_iso8601(event.startTime) do
         {:ok, datetime, _} ->
