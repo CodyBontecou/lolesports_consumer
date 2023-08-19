@@ -1,9 +1,5 @@
 on: push
 
-defaults:
-  run:
-    working-directory: lolesports_consumer
-
 jobs:
   test:
     name: Elixir tests
